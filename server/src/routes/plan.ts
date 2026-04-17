@@ -1,7 +1,7 @@
 import { Router , type Request, type Response } from "express";
 import { error } from "node:console";
 import { prisma } from "../lib/prisma";
-import { Prisma } from "../generated/prisma/browser";
+import { PrismaClient } from "@prisma/client"
 import { version } from "node:os";
 import { generateTrainingPlan } from "../lib/ai";
 
