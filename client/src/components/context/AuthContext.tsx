@@ -39,8 +39,23 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     async function loadUser() {
       try {
         const result = await authClient.getSession();
+        const user = result?.data?.user;
 
-        setNeonUser(result?.data?.user ?? null);
+        if (user) {
+          setNeonUser({
+            ...user,
+            createdAt:
+              user.createdAt instanceof Date
+                ? user.createdAt.toISOString()
+                : user.createdAt,
+            updatedAt:
+              user.updatedAt instanceof Date
+                ? user.updatedAt.toISOString()
+                : user.updatedAt,
+          });
+        } else {
+          setNeonUser(null);
+        }
       } catch {
         setNeonUser(null);
       } finally {
