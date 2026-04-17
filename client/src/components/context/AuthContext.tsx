@@ -43,16 +43,12 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
         if (user) {
           setNeonUser({
-            ...user,
-            createdAt:
-              user.createdAt instanceof Date
-                ? user.createdAt.toISOString()
-                : user.createdAt,
-            updatedAt:
-              user.updatedAt instanceof Date
-                ? user.updatedAt.toISOString()
-                : user.updatedAt,
-          });
+  ...user,
+  createdAt:
+    user.createdAt instanceof Date
+      ? user.createdAt.toISOString()
+      : user.createdAt,
+});
         } else {
           setNeonUser(null);
         }
