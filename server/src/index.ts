@@ -14,6 +14,13 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json({
+    status: "ok",
+    service: "IRONMIND API",
+  });
+});
+
 app.use("/api/profile", profileRouter)
 app.use("/api/plan", planRouter);
 
