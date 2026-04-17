@@ -114,6 +114,11 @@ export default function nOnboarding() {
                        {!isGenerating ? <Card variant="bordered">
                             <h1 className="text-2xl font-bold mb-2">Tell Us About Yourself</h1>
                             <p className="text-muted mb-6">Help us to create the perfect plan for you</p>
+                            {isError && (
+                                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                                    {isError}
+                                </div>
+                            )}
                              <form className="space-y-5" onSubmit={handleQuestionare}>
 
                             <Select id="goal" 

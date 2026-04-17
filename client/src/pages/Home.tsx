@@ -7,21 +7,28 @@ import {
   Sparkles,
   Clock,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Button } from "../components/ui/Button";
 import { useAuth } from "../components/context/AuthContext";
 
 /* ─── Animation configs ───────────────── */
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+
+const fadeUp: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1], // ✅ FIXED (no TS error)
+    },
   },
 };
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -31,6 +38,7 @@ const container = {
 };
 
 /* ─── Data ───────────────────────────── */
+
 const features = [
   {
     icon: Sparkles,
@@ -71,7 +79,6 @@ export default function Home() {
       {/* ─── HERO ───────────────── */}
       <section className="relative pt-36 pb-24 px-6 overflow-hidden">
 
-        {/* Animated background glow */}
         <div className="absolute inset-0 flex justify-center -z-10">
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
@@ -86,7 +93,6 @@ export default function Home() {
           animate="show"
           className="max-w-5xl mx-auto text-center"
         >
-          {/* Badge */}
           <motion.div
             variants={fadeUp}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur mb-8"
@@ -97,19 +103,15 @@ export default function Home() {
             </span>
           </motion.div>
 
-          {/* Headline */}
           <motion.h1
             variants={fadeUp}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.05]"
           >
             Stop guessing your workouts.
             <br />
-            <span className="text-accent">
-              Train with a system.
-            </span>
+            <span className="text-accent">Train with a system.</span>
           </motion.h1>
 
-          {/* Subtext */}
           <motion.p
             variants={fadeUp}
             className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10"
@@ -118,7 +120,6 @@ export default function Home() {
             schedule, and experience — and automatically adapt as you progress.
           </motion.p>
 
-          {/* CTA */}
           <motion.div
             variants={fadeUp}
             className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -137,11 +138,7 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          {/* Trust line */}
-          <motion.p
-            variants={fadeUp}
-            className="text-xs text-muted mt-6"
-          >
+          <motion.p variants={fadeUp} className="text-xs text-muted mt-6">
             No credit card required · Setup in under 60 seconds
           </motion.p>
         </motion.div>
@@ -161,12 +158,10 @@ export default function Home() {
               className={`flex flex-col md:flex-row gap-6 p-8 transition-all duration-300 hover:bg-accent/5
               ${i !== features.length - 1 ? "border-b border-border" : ""}`}
             >
-              {/* Icon */}
               <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-accent/10 shrink-0">
                 <feature.icon className="w-5 h-5 text-accent" />
               </div>
 
-              {/* Content */}
               <div className="flex-1">
                 <h3 className="font-semibold text-lg mb-2">
                   {feature.title}
@@ -176,7 +171,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Right hint */}
               <div className="hidden md:flex items-center text-xs text-muted">
                 Optimised →
               </div>
